@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AulaXpro — Tu asistente docente con IA</title>
+  <meta name="description" content="AulaXpro es la plataforma de inteligencia artificial diseñada para docentes argentinos. Ahorrá tiempo, mejorá la calidad de tu trabajo y llevá tu aula al siguiente nivel."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0D3559;
+      --navy-light: #1a4a72;
+      --teal: #26C3D4;
+      --teal-dark: #1a9aaa;
+      --green: #79BD9A;
+      --green-light: #A8DBA8;
+      --lime: #CFF09E;
+      --bg: #f0f9f4;
+      --white: #ffffff;
+      --text: #0D3559;
+      --text-muted: #4a7a8a;
+      --border: #c2e8d0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .logo-text { font-family: 'Syne', sans-serif; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      background: rgba(240, 249, 244, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--navy);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      width: 20px; height: 2px;
+      background: var(--teal);
+      top: 10px; left: 8px;
+      box-shadow: 0 5px 0 var(--green-light), 0 10px 0 var(--lime);
+    }
+    .logo-icon::after {
+      content: '';
+      position: absolute;
+      width: 8px; height: 8px;
+      background: var(--teal);
+      border-radius: 50%;
+      top: 8px; right: 8px;
+    }
+    .logo-text { font-size: 20px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; }
+    .logo-text span { color: var(--teal); }
+
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--navy); }
+
+    .nav-cta {
+      background: var(--navy);
+      color: #fff;
+      text-decoration: none;
+      padding: 9px 22px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Syne', sans-serif;
+      transition: background .2s, transform .1s;
+    }
+    .nav-cta:hover { background: var(--navy-light); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(38,195,212,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(121,189,154,.15) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(207,240,158,.08) 0%, transparent 70%);
+    }
+
+    .hero-dots {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: radial-gradient(circle, rgba(13,53,89,.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    .hero-inner {
+      position: relative; z-index: 1;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--lime); color: var(--navy);
+      padding: 6px 14px; border-radius: 100px;
+      font-size: 13px; font-weight: 600;
+      margin-bottom: 24px;
+      border: 1px solid rgba(13,53,89,.1);
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 5vw, 58px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      color: var(--navy);
+      margin-bottom: 22px;
+    }
+
+    .hero h1 .accent { color: var(--teal); }
+    .hero h1 .underline {
+      position: relative; display: inline-block;
+    }
+    .hero h1 .underline::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0; right: 0; height: 4px;
+      background: var(--lime);
+      border-radius: 2px;
+    }
+
+    .hero-desc {
+      font-size: 18px; line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 500px;
+    }
+
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--navy);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 15px; font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 20px rgba(13,53,89,.25);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(13,53,89,.3); }
+
+    .btn-secondary {
+      color: var(--navy);
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 15px; font-weight: 500;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1.5px solid var(--border);
+      transition: border-color .2s, background .2s;
+    }
+    .btn-secondary:hover { border-color: var(--teal); background: rgba(38,195,212,.05); }
+
+    .hero-trust {
+      margin-top: 40px;
+      display: flex; align-items: center; gap: 20px;
+      font-size: 13px; color: var(--text-muted);
+    }
+    .hero-trust .trust-item { display: flex; align-items: center; gap: 6px; }
+    .hero-trust i { color: var(--green); font-size: 15px; }
+
+    /* App Preview */
+    .hero-preview {
+      position: relative;
+    }
+    .preview-card {
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(13,53,89,.12), 0 4px 20px rgba(13,53,89,.06);
+      transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+      transition: transform .3s;
+    }
+    .preview-card:hover { transform: perspective(1000px) rotateY(-2deg) rotateX(1deg); }
+
+    .preview-topbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .preview-dots { display: flex; gap: 5px; }
+    .preview-dots span {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .preview-dots span:nth-child(1) { background: #ff5f57; }
+    .preview-dots span:nth-child(2) { background: #ffbd2e; }
+    .preview-dots span:nth-child(3) { background: #28c840; }
+    .preview-title { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+
+    .preview-body { display: flex; height: 360px; }
+    .preview-sidebar {
+      width: 160px; background: var(--navy);
+      padding: 16px 0;
+    }
+    .preview-logo { padding: 0 16px 16px; font-family: 'Syne',sans-serif; font-weight: 800; font-size: 14px; color: var(--teal); border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 8px; }
+    .preview-nav-item {
+      padding: 8px 16px; font-size: 11px; color: rgba(255,255,255,.5);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .preview-nav-item.active { color: var(--teal); background: rgba(38,195,212,.1); border-left: 2px solid var(--teal); }
+    .preview-nav-item i { font-size: 14px; }
+
+    .preview-content { flex: 1; padding: 16px; background: var(--bg); overflow: hidden; }
+    .preview-welcome { font-family: 'Syne',sans-serif; font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 12px; }
+    .preview-stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 12px; }
+    .preview-stat { background: var(--white); border-radius: 6px; padding: 10px 12px; border: 1px solid var(--border); }
+    .preview-stat-n { font-family: 'Syne',sans-serif; font-weight: 700; font-size: 18px; color: var(--teal); }
+    .preview-stat-l { font-size: 10px; color: var(--text-muted); }
+    .preview-gen { background: var(--white); border-radius: 6px; padding: 10px 12px; border: 1px solid var(--border); }
+    .preview-gen-title { font-size: 10px; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; letter-spacing: .5px; }
+    .preview-gen-item { display: flex; align-items: center; gap: 6px; padding: 5px 0; border-bottom: 1px solid var(--border); }
+    .preview-gen-item:last-child { border: none; }
+    .preview-gen-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+    .preview-gen-text { font-size: 10px; color: var(--text); }
+
+    .floating-badge {
+      position: absolute;
+      background: var(--white);
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 8px 24px rgba(13,53,89,.12);
+      border: 1px solid var(--border);
+      font-size: 12px; font-weight: 600; color: var(--navy);
+      display: flex; align-items: center; gap: 6px;
+      animation: float 3s ease-in-out infinite;
+    }
+    .badge-1 { top: -20px; right: -20px; }
+    .badge-2 { bottom: 30px; left: -30px; animation-delay: 1.5s; }
+    .badge-1 i, .badge-2 i { font-size: 16px; }
+    .badge-1 i { color: var(--teal); }
+    .badge-2 i { color: var(--green); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--navy);
+      padding: 28px 5%;
+    }
+    .stats-bar-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 32px;
+      text-align: center;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Syne',sans-serif;
+      font-size: 36px; font-weight: 800;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,.6); }
+
+    /* ── SECTIONS ── */
+    .section { padding: 80px 5%; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(38,195,212,.12);
+      color: var(--teal-dark);
+      padding: 5px 12px; border-radius: 100px;
+      font-size: 12px; font-weight: 700; letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800; letter-spacing: -1px;
+      color: var(--navy); line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .section-title .accent { color: var(--teal); }
+
+    .section-desc {
+      font-size: 17px; line-height: 1.65;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin-bottom: 48px;
+    }
+
+    /* ── FEATURES GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 28px 24px;
+      border: 1px solid var(--border);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--green));
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(13,53,89,.1);
+      border-color: rgba(38,195,212,.3);
+    }
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: rgba(38,195,212,.12);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .feature-icon i { font-size: 22px; color: var(--teal-dark); }
+
+    .feature-card h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .feature-card p { font-size: 14px; line-height: 1.6; color: var(--text-muted); }
+
+    .feature-card.highlight {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+    .feature-card.highlight::before { opacity: 1; }
+    .feature-card.highlight .feature-icon { background: rgba(38,195,212,.2); }
+    .feature-card.highlight h3 { color: var(--white); }
+    .feature-card.highlight p { color: rgba(255,255,255,.65); }
+
+    /* ── HOW IT WORKS ── */
+    .how-bg { background: var(--white); }
+
+    .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; }
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 36px; left: 12.5%; right: 12.5%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--green), var(--lime));
+    }
+
+    .step { text-align: center; padding: 0 16px; }
+    .step-num {
+      width: 72px; height: 72px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-family: 'Syne',sans-serif;
+      font-size: 24px; font-weight: 800;
+      color: var(--teal);
+      position: relative; z-index: 1;
+      border: 4px solid var(--bg);
+    }
+    .step h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .step p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── DIFFERENTIAL ── */
+    .diff-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+
+    .diff-list { display: flex; flex-direction: column; gap: 20px; }
+    .diff-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 20px; background: var(--white);
+      border-radius: 10px; border: 1px solid var(--border);
+      transition: border-color .2s, transform .2s;
+    }
+    .diff-item:hover { border-color: var(--teal); transform: translateX(4px); }
+    .diff-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--lime);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .diff-icon i { font-size: 18px; color: var(--navy); }
+    .diff-item h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .diff-item p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+    .diff-visual {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 32px;
+      color: white;
+    }
+    .diff-visual-title { font-family: 'Syne',sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 24px; color: var(--teal); }
+    .diff-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .diff-row:last-child { border: none; }
+    .diff-row-label { font-size: 13px; color: rgba(255,255,255,.7); }
+    .diff-row-val { font-size: 13px; font-weight: 600; color: var(--lime); display: flex; align-items: center; gap: 6px; }
+    .diff-row-val i { font-size: 14px; color: var(--green); }
+
+    /* ── PRICING ── */
+    .pricing-bg { background: var(--white); }
+
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 20px;
+    }
+
+    .price-card {
+      border-radius: 12px; padding: 28px 24px;
+      border: 2px solid var(--border);
+      display: flex; flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .price-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(13,53,89,.1); }
+    .price-card.featured {
+      background: var(--navy);
+      border-color: var(--teal);
+    }
+
+    .price-badge {
+      display: inline-block;
+      background: var(--teal); color: var(--navy);
+      font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 100px;
+      margin-bottom: 12px;
+    }
+    .price-name { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .price-card.featured .price-name { color: var(--white); }
+    .price-users { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
+    .price-card.featured .price-users { color: rgba(255,255,255,.6); }
+
+    .price-amount {
+      font-family: 'Syne',sans-serif;
+      font-size: 30px; font-weight: 800;
+      color: var(--teal); margin-bottom: 4px;
+      line-height: 1;
+    }
+    .price-period { font-size: 12px; color: var(--text-muted); margin-bottom: 24px; }
+    .price-card.featured .price-period { color: rgba(255,255,255,.5); }
+
+    .price-features { flex: 1; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .price-feat { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text); }
+    .price-card.featured .price-feat { color: rgba(255,255,255,.8); }
+    .price-feat i { font-size: 14px; color: var(--green); }
+    .price-card.featured .price-feat i { color: var(--teal); }
+
+    .price-btn {
+      display: block; text-align: center; text-decoration: none;
+      padding: 12px; border-radius: 8px;
+      font-family: 'Syne',sans-serif; font-size: 14px; font-weight: 700;
+      transition: opacity .2s, transform .1s;
+      background: var(--navy); color: var(--white);
+    }
+    .price-card.featured .price-btn { background: var(--teal); color: var(--navy); }
+    .price-btn:hover { opacity: .88; transform: translateY(-1px); }
+
+    .trial-note {
+      text-align: center; margin-top: 24px;
+      font-size: 14px; color: var(--text-muted);
+    }
+    .trial-note strong { color: var(--navy); }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+
+    .testimonial {
+      background: var(--white); border-radius: 12px;
+      padding: 28px 24px; border: 1px solid var(--border);
+    }
+    .testimonial-stars { color: #f59e0b; font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+    .testimonial-text { font-size: 14px; line-height: 1.7; color: var(--text-muted); margin-bottom: 20px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne',sans-serif; font-weight: 700; font-size: 15px; color: var(--teal);
+    }
+    .author-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .author-role { font-size: 12px; color: var(--text-muted); }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 80px 5%;
+      background: var(--navy);
+      text-align: center;
+    }
+    .cta-inner { max-width: 700px; margin: 0 auto; }
+    .cta-section h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800; letter-spacing: -1px;
+      color: var(--white); margin-bottom: 16px; line-height: 1.15;
+    }
+    .cta-section h2 span { color: var(--teal); }
+    .cta-section p { font-size: 17px; color: rgba(255,255,255,.65); margin-bottom: 36px; line-height: 1.6; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--teal); color: var(--navy);
+      padding: 16px 36px; border-radius: 8px;
+      font-family: 'Syne',sans-serif; font-size: 16px; font-weight: 800;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 4px 20px rgba(38,195,212,.35);
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(38,195,212,.45); }
+    .cta-note { margin-top: 20px; font-size: 13px; color: rgba(255,255,255,.4); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #091f33;
+      padding: 48px 5% 32px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    }
+    .footer-brand .logo-text { color: var(--white); margin-bottom: 12px; display: block; }
+    .footer-desc { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.7; }
+    .footer-col h5 { font-size: 13px; font-weight: 700; color: rgba(255,255,255,.7); margin-bottom: 16px; letter-spacing: .5px; text-transform: uppercase; }
+    .footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,.4); text-decoration: none; margin-bottom: 10px; transition: color .2s; }
+    .footer-col a:hover { color: var(--teal); }
+    .footer-bottom {
+      max-width: 1200px; margin: 32px auto 0;
+      padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; color: rgba(255,255,255,.3);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2,1fr); }
+      .pricing-grid { grid-template-columns: repeat(2,1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-preview { display: none; }
+      .stats-bar-inner { grid-template-columns: repeat(2,1fr); }
+      .features-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: repeat(2,1fr); }
+      .steps::before { display: none; }
+      .diff-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .nav-links { display: none; }
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .6s, transform .6s;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon"></div>
+    <span class="logo-text">Aula<span>X</span>pro</span>
+  </a>
+  <div class="nav-links">
+    <a href="#funciones">Funciones</a>
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#precios">Precios</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a href="https://eduai-pro-nine.vercel.app" class="nav-cta">Entrar a la app →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <i class="ti ti-sparkles"></i>
+        7 días gratis · Sin tarjeta de crédito
+      </div>
+      <h1>
+        El asistente IA que los docentes<br>
+        <span class="underline">merecían</span> tener
+      </h1>
+      <p class="hero-desc">
+        AulaXpro usa inteligencia artificial para ayudarte a planificar, crear materiales, corregir trabajos y hacer seguimiento de tus alumnos. En minutos, no en horas.
+      </p>
+      <div class="hero-actions">
+        <a href="https://eduai-pro-nine.vercel.app" class="btn-primary">
+          <i class="ti ti-rocket"></i>
+          Probá gratis 7 días
+        </a>
+        <a href="#funciones" class="btn-secondary">
+          Ver funciones
+          <i class="ti ti-arrow-down"></i>
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><i class="ti ti-check"></i> Sin tarjeta de crédito</div>
+        <div class="trust-item"><i class="ti ti-check"></i> Cancela cuando quieras</div>
+        <div class="trust-item"><i class="ti ti-check"></i> En español</div>
+      </div>
+    </div>
+    <div class="hero-preview">
+      <div class="floating-badge badge-1">
+        <i class="ti ti-brain"></i>
+        IA generando plan de clase...
+      </div>
+      <div class="preview-card">
+        <div class="preview-topbar">
+          <div class="preview-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="preview-title">aulaxpro.com</span>
+        </div>
+        <div class="preview-body">
+          <div class="preview-sidebar">
+            <div class="preview-logo">AulaXpro</div>
+            <div class="preview-nav-item active"><i class="ti ti-bolt"></i> Generador</div>
+            <div class="preview-nav-item"><i class="ti ti-books"></i> Biblioteca</div>
+            <div class="preview-nav-item"><i class="ti ti-message"></i> Chat</div>
+            <div class="preview-nav-item"><i class="ti ti-checklist"></i> Corrector</div>
+            <div class="preview-nav-item"><i class="ti ti-users"></i> Alumnos</div>
+            <div class="preview-nav-item"><i class="ti ti-list-numbers"></i> Secuencias</div>
+          </div>
+          <div class="preview-content">
+            <div class="preview-welcome">Buenos días, Prof. García 👋</div>
+            <div class="preview-stats">
+              <div class="preview-stat">
+                <div class="preview-stat-n">24</div>
+                <div class="preview-stat-l">Materiales</div>
+              </div>
+              <div class="preview-stat">
+                <div class="preview-stat-n">3</div>
+                <div class="preview-stat-l">Materias</div>
+              </div>
+            </div>
+            <div class="preview-gen">
+              <div class="preview-gen-title">GENERADO HOY</div>
+              <div class="preview-gen-item"><div class="preview-gen-dot"></div><div class="preview-gen-text">Plan de clase — La célula</div></div>
+              <div class="preview-gen-item"><div class="preview-gen-dot" style="background:#79BD9A"></div><div class="preview-gen-text">Rúbrica — TP grupal</div></div>
+              <div class="preview-gen-item"><div class="preview-gen-dot" style="background:#CFF09E"></div><div class="preview-gen-text">Evaluación — Unidad 3</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-badge badge-2">
+        <i class="ti ti-check"></i>
+        32 alumnos evaluados
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="stat-item">
+      <div class="stat-num">8</div>
+      <div class="stat-label">Tipos de contenido generables</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3×</div>
+      <div class="stat-label">Más rápido que preparar manualmente</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">En español rioplatense</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Días de prueba gratis</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="funciones">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-tag"><i class="ti ti-stars"></i> Funcionalidades</div>
+      <h2 class="section-title">Todo lo que necesitás,<br><span class="accent">en un solo lugar</span></h2>
+      <p class="section-desc">AulaXpro centraliza las tareas más repetitivas de la docencia y las transforma en flujos de trabajo inteligentes.</p>
+    </div>
+    <div class="features-grid fade-in">
+      <div class="feature-card highlight">
+        <div class="feature-icon"><i class="ti ti-bolt"></i></div>
+        <h3>Generador IA de contenido</h3>
+        <p>Planes de clase, rúbricas, evaluaciones, guías de estudio, material didáctico y más. Con tu programa cargado, Claude genera contenido ajustado a tu materia real.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-checklist"></i></div>
+        <h3>Corrector de TPs con IA</h3>
+        <p>Cargá una rúbrica y el trabajo del alumno. La IA devuelve una corrección completa con nota, fortalezas, áreas de mejora y devolución personalizada.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-camera"></i></div>
+        <h3>Fotografiá exámenes escritos</h3>
+        <p>Desde el celular, sacá una foto del examen escrito a mano. Claude extrae el texto y lo corrige automáticamente. Sin tipear nada.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-users"></i></div>
+        <h3>Seguimiento de alumnos</h3>
+        <p>Registrá evaluaciones, calculá promedios automáticamente y visualizá el progreso de cada alumno a lo largo del año.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-list-numbers"></i></div>
+        <h3>Secuencias didácticas</h3>
+        <p>Generá secuencias de 4, 6 u 8 clases encadenadas con progresión pedagógica clara. Cada clase retoma la anterior de forma coherente.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-arrows-split"></i></div>
+        <h3>Diferenciación automática</h3>
+        <p>A partir de cualquier contenido generado, creá 3 versiones adaptadas: básica, estándar y avanzada para atender la diversidad del aula.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-brain"></i></div>
+        <h3>Banco inteligente de preguntas</h3>
+        <p>Extraé preguntas de tus evaluaciones, organizalas por tema y armá nuevas evaluaciones seleccionando las que necesitás.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-file-invoice"></i></div>
+        <h3>Bibliografía en PDF</h3>
+        <p>Cargá los PDFs de tu bibliografía. Claude los analiza y genera todo el material educativo basándose en tus textos reales.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="ti ti-photo-ai"></i></div>
+        <h3>Generador de imágenes educativas</h3>
+        <p>Creá imágenes ilustrativas para tus actividades y presentaciones con IA. Diagramas, ilustraciones y recursos visuales en segundos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-bg" id="como-funciona">
+  <div class="section-inner">
+    <div style="text-align:center" class="fade-in">
+      <div class="section-tag" style="margin:0 auto 16px"><i class="ti ti-route"></i> Cómo funciona</div>
+      <h2 class="section-title">Empezá a usarlo en <span class="accent">4 pasos</span></h2>
+      <p class="section-desc" style="margin:0 auto 56px">No necesitás conocimientos técnicos. Si podés enviar un email, podés usar AulaXpro.</p>
+    </div>
+    <div class="steps fade-in">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Registrate gratis</h4>
+        <p>Creá tu cuenta en segundos. 7 días de prueba sin tarjeta de crédito.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Cargá tus materias</h4>
+        <p>Agregá tu materia, nivel y pegá tu programa o bibliografía.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Generá contenido</h4>
+        <p>Elegí el tipo de material que necesitás y la IA lo crea en segundos.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Exportá y usalo</h4>
+        <p>Descargá en Word, PDF o PowerPoint listo para usar en el aula.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIAL -->
+<section class="section">
+  <div class="section-inner">
+    <div class="diff-grid">
+      <div class="fade-in">
+        <div class="section-tag"><i class="ti ti-trophy"></i> Por qué AulaXpro</div>
+        <h2 class="section-title">Más que un<br><span class="accent">chatbot genérico</span></h2>
+        <p class="section-desc">ChatGPT y Claude son potentes, pero no recuerdan a tus alumnos, no guardan tu rúbrica ni conocen tu programa. AulaXpro sí.</p>
+        <div class="diff-list">
+          <div class="diff-item">
+            <div class="diff-icon"><i class="ti ti-database"></i></div>
+            <div>
+              <h4>Memoria institucional</h4>
+              <p>Todo lo que generás queda guardado. Tu biblioteca crece con vos durante el año.</p>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon"><i class="ti ti-file-upload"></i></div>
+            <div>
+              <h4>Corrección en batch</h4>
+              <p>Subí un Excel con 30 trabajos y corregalos todos contra la misma rúbrica de una vez.</p>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon"><i class="ti ti-users"></i></div>
+            <div>
+              <h4>Historial de alumnos</h4>
+              <p>Registrá evaluaciones, calculá promedios y detectá alumnos en riesgo durante el año.</p>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon"><i class="ti ti-school"></i></div>
+            <div>
+              <h4>Gestión institucional</h4>
+              <p>Los directivos pueden cargar docentes masivamente y gestionar accesos del colegio.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="diff-visual fade-in">
+        <div class="diff-visual-title">AulaXpro vs ChatGPT</div>
+        <div class="diff-row">
+          <span class="diff-row-label">Recuerda tu programa</span>
+          <span class="diff-row-val"><i class="ti ti-check"></i> Sí</span>
+        </div>
+        <div class="diff-row">
+          <span class="diff-row-label">Guarda tu biblioteca</span>
+          <span class="diff-row-val"><i class="ti ti-check"></i> Sí</span>
+        </div>
+        <div class="diff-row">
+          <span class="diff-row-label">Corrección en batch</span>
+          <span class="diff-row-val"><i class="ti ti-check"></i> Sí</span>
+        </div>
+        <div class="diff-row">
+          <span class="diff-row-label">Seguimiento de alumnos</span>
+          <span class="diff-row-val"><i class="ti ti-check"></i> Sí</span>
+        </div>
+        <div class="diff-row">
+          <span class="diff-row-label">Exporta a Word/PDF/PPT</span>
+          <span class="diff-row-val"><i class="ti ti-check"></i> Sí</span>
+        </div>
+        <div class="diff-row">
+          <span class="diff-row-label">En español rioplatense</span>
+          <span class="diff-row-val"><i class="ti ti-check"></i> Siempre</span>
+        </div>
+        <div class="diff-row">
+          <span class="diff-row-label">Fotografiar exámenes</span>
+          <span class="diff-row-val"><i class="ti ti-check"></i> Sí</span>
+        </div>
+        <div class="diff-row">
+          <span class="diff-row-label">Gestión institucional</span>
+          <span class="diff-row-val"><i class="ti ti-check"></i> Sí</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section pricing-bg" id="precios">
+  <div class="section-inner">
+    <div style="text-align:center" class="fade-in">
+      <div class="section-tag" style="margin:0 auto 16px"><i class="ti ti-credit-card"></i> Precios</div>
+      <h2 class="section-title">Simple y <span class="accent">transparente</span></h2>
+      <p class="section-desc" style="margin:0 auto 48px">Todos los planes incluyen 7 días de prueba gratuita. Sin sorpresas.</p>
+    </div>
+    <div class="pricing-grid fade-in">
+      <div class="price-card">
+        <div class="price-name">Individual Mensual</div>
+        <div class="price-users">1 docente</div>
+        <div class="price-amount">$12.000</div>
+        <div class="price-period">ARS por mes</div>
+        <div class="price-features">
+          <div class="price-feat"><i class="ti ti-check"></i> Generador IA (8 tipos)</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Corrector de TPs</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Seguimiento de alumnos</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Exportación Word/PDF</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Biblioteca personal</div>
+        </div>
+        <a href="https://eduai-pro-nine.vercel.app" class="price-btn">Empezar gratis</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Ahorrá 15%</div>
+        <div class="price-name">Individual Anual</div>
+        <div class="price-users">1 docente</div>
+        <div class="price-amount">$102.000</div>
+        <div class="price-period">ARS por año</div>
+        <div class="price-features">
+          <div class="price-feat"><i class="ti ti-check"></i> Todo Individual</div>
+          <div class="price-feat"><i class="ti ti-check"></i> 2 meses gratis</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Soporte prioritario</div>
+        </div>
+        <a href="https://eduai-pro-nine.vercel.app" class="price-btn">Empezar gratis</a>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Institucional Básico</div>
+        <div class="price-users">Hasta 10 docentes</div>
+        <div class="price-amount">$100.000</div>
+        <div class="price-period">ARS por mes</div>
+        <div class="price-features">
+          <div class="price-feat"><i class="ti ti-check"></i> Todo Individual</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Gestión de docentes</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Carga desde Excel</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Panel administrativo</div>
+        </div>
+        <a href="https://eduai-pro-nine.vercel.app" class="price-btn">Empezar gratis</a>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Institucional Pro</div>
+        <div class="price-users">Hasta 30 docentes</div>
+        <div class="price-amount">$255.000</div>
+        <div class="price-period">ARS por mes</div>
+        <div class="price-features">
+          <div class="price-feat"><i class="ti ti-check"></i> Todo Básico</div>
+          <div class="price-feat"><i class="ti ti-check"></i> 30 docentes</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Reportes de uso</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Soporte dedicado</div>
+        </div>
+        <a href="https://eduai-pro-nine.vercel.app" class="price-btn">Empezar gratis</a>
+      </div>
+    </div>
+    <p class="trial-note">Todos los planes incluyen <strong>7 días de prueba gratuita</strong> sin tarjeta de crédito. Pagos procesados por MercadoPago.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonios">
+  <div class="section-inner">
+    <div style="text-align:center" class="fade-in">
+      <div class="section-tag" style="margin:0 auto 16px"><i class="ti ti-quote"></i> Testimonios</div>
+      <h2 class="section-title">Lo que dicen los <span class="accent">docentes</span></h2>
+      <p class="section-desc" style="margin:0 auto 48px">Profesores de todo el país ya usan AulaXpro en su práctica diaria.</p>
+    </div>
+    <div class="testimonials-grid fade-in">
+      <div class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Lo que me llevaba 2 horas ahora lo hago en 15 minutos. Los planes de clase que genera son realmente buenos y los adapto con mínimos cambios."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MR</div>
+          <div>
+            <div class="author-name">María R.</div>
+            <div class="author-role">Profesora de Biología, Buenos Aires</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"La función de corregir fotos de exámenes es increíble. Mis alumnos entregan en papel y yo corrijo desde el celular en el recreo. Cambió todo."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">CL</div>
+          <div>
+            <div class="author-name">Carlos L.</div>
+            <div class="author-role">Profesor de Historia, Córdoba</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Como directora, lo usé para capacitar a mis docentes. En menos de un mes todo el equipo generaba material de calidad con mucho menos esfuerzo."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AL</div>
+          <div>
+            <div class="author-name">Ana L.</div>
+            <div class="author-role">Directora de nivel secundario, Rosario</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="cta-inner fade-in">
+    <h2>Empezá hoy.<br><span>7 días gratis</span>, sin compromiso.</h2>
+    <p>Unite a los docentes que ya ahorraron cientos de horas con AulaXpro. Sin tarjeta de crédito. Sin contratos. Cancela cuando quieras.</p>
+    <a href="https://eduai-pro-nine.vercel.app" class="cta-btn">
+      <i class="ti ti-rocket"></i>
+      Crear mi cuenta gratis
+    </a>
+    <p class="cta-note">¿Tenés dudas? Escribinos a hola@aulaxpro.com</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text">Aula<span style="color:var(--teal)">X</span>pro</span>
+      <p class="footer-desc">La plataforma de IA diseñada para docentes argentinos. Ahorrá tiempo, mejorá la calidad y recuperá energía para lo que realmente importa: enseñar.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Producto</h5>
+      <a href="#funciones">Funciones</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#precios">Precios</a>
+      <a href="https://eduai-pro-nine.vercel.app">Entrar a la app</a>
+    </div>
+    <div class="footer-col">
+      <h5>Para instituciones</h5>
+      <a href="#precios">Plan Institucional</a>
+      <a href="#contacto">Contacto comercial</a>
+      <a href="#contacto">Demo para colegios</a>
+    </div>
+    <div class="footer-col">
+      <h5>Contacto</h5>
+      <a href="mailto:hola@aulaxpro.com">hola@aulaxpro.com</a>
+      <a href="#">Argentina</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 AulaXpro. Todos los derechos reservados.</span>
+    <span>Hecho con IA · Diseñado para docentes</span>
+  </div>
+</footer>
+
+<script>
+  // Fade in on scroll
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(function(el) {
+    observer.observe(el);
+  });
+
+  // Smooth nav links
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      var target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
