@@ -26,6 +26,8 @@
       --text: #0D3559;
       --text-muted: #4a7a8a;
       --border: #c2e8d0;
+      --accent: #FF6B4A;
+      --accent-dark: #F0522F;
     }
 
     html { scroll-behavior: smooth; }
@@ -163,7 +165,7 @@
     .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 
     .btn-primary {
-      background: var(--navy);
+      background: var(--accent);
       color: #fff;
       padding: 14px 28px;
       border-radius: 8px;
@@ -172,9 +174,9 @@
       text-decoration: none;
       display: inline-flex; align-items: center; gap: 8px;
       transition: transform .15s, box-shadow .15s;
-      box-shadow: 0 4px 20px rgba(13,53,89,.25);
+      box-shadow: 0 4px 20px rgba(255,107,74,.35);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(13,53,89,.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 34px rgba(255,107,74,.35); background: var(--accent-dark); }
 
     .btn-secondary {
       color: var(--navy);
@@ -494,7 +496,7 @@
       transition: opacity .2s, transform .1s;
       background: var(--navy); color: var(--white);
     }
-    .price-card.featured .price-btn { background: var(--teal); color: var(--navy); }
+    .price-card.featured .price-btn { background: var(--accent); color: #fff; }
     .price-btn:hover { opacity: .88; transform: translateY(-1px); }
 
     .trial-note {
@@ -538,7 +540,7 @@
     .cta-section p { font-size: 17px; color: rgba(255,255,255,.65); margin-bottom: 36px; line-height: 1.6; }
     .cta-btn {
       display: inline-flex; align-items: center; gap: 10px;
-      background: var(--teal); color: var(--navy);
+      background: var(--accent); color: #fff;
       padding: 16px 36px; border-radius: 8px;
       font-family: 'Syne',sans-serif; font-size: 16px; font-weight: 800;
       text-decoration: none;
