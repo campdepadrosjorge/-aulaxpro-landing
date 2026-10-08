@@ -445,7 +445,7 @@
     .pricing-bg { background: var(--white); }
 
     .pricing-grid {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 20px;
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; max-width: 980px; margin: 0 auto;
     }
 
     .price-card {
@@ -596,7 +596,16 @@
       transition: opacity .6s, transform .6s;
     }
     .fade-in.visible { opacity: 1; transform: none; }
-  </style>
+  
+    /* FAQ */
+    .faq-list { max-width: 760px; margin: 0 auto; }
+    .faq-item { border:1px solid var(--border); border-radius:12px; margin-bottom:14px; background:var(--white); overflow:hidden; }
+    .faq-q { width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:20px 24px; font-size:16px; font-weight:600; color:var(--text); font-family:inherit; display:flex; justify-content:space-between; align-items:center; gap:16px; }
+    .faq-q i { color:var(--teal); transition:transform .25s; flex-shrink:0; }
+    .faq-item.open .faq-q i { transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .3s ease; padding:0 24px; color:var(--text-muted); font-size:15px; line-height:1.6; }
+    .faq-item.open .faq-a { max-height:300px; padding:0 24px 20px; }
+</style>
 </head>
 <body>
 
@@ -610,6 +619,7 @@
     <a href="#funciones">Funciones</a>
     <a href="#como-funciona">Cómo funciona</a>
     <a href="#precios">Precios</a>
+    <a href="#faq">Preguntas</a>
     <a href="#contacto">Contacto</a>
   </div>
   <a href="https://app.aulaxpro.com" class="nav-cta">Entrar a la app →</a>
@@ -623,14 +633,14 @@
     <div>
       <div class="hero-badge">
         <i class="ti ti-sparkles"></i>
-        7 días gratis · Sin tarjeta de crédito
+        Probalo gratis 7 días · Sin tarjeta de crédito
       </div>
       <h1>
-        El asistente IA que los docentes<br>
-        <span class="underline">necesitan</span> tener
+        Preparás tu clase en<br>
+        <span class="underline">minutos</span>, no en horas
       </h1>
       <p class="hero-desc">
-        AulaXpro usa inteligencia artificial para ayudarte a planificar, crear materiales, corregir trabajos y hacer seguimiento de tus alumnos. En minutos, no en horas.
+        AulaXpro es la inteligencia artificial que planifica, crea materiales, corrige trabajos y hace el seguimiento de tus alumnos por vos. Recuperá tus tardes y fines de semana.
       </p>
       <div class="hero-actions">
         <a href="https://app.aulaxpro.com" class="btn-primary">
@@ -703,20 +713,20 @@
 <div class="stats-bar">
   <div class="stats-bar-inner">
     <div class="stat-item">
-      <div class="stat-num">8</div>
-      <div class="stat-label">Tipos de contenido generables</div>
+      <div class="stat-num">45 → 2</div>
+      <div class="stat-label">Minutos para armar una evaluación</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">3×</div>
-      <div class="stat-label">Más rápido que preparar manualmente</div>
+      <div class="stat-num">15</div>
+      <div class="stat-label">Herramientas en una sola app</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">100%</div>
-      <div class="stat-label">En español</div>
+      <div class="stat-label">En español y para el aula argentina</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">7</div>
-      <div class="stat-label">Días de prueba gratis</div>
+      <div class="stat-label">Días de prueba gratis, sin tarjeta</div>
     </div>
   </div>
 </div>
@@ -959,30 +969,18 @@
         <a href="https://app.aulaxpro.com" class="price-btn">Empezar gratis</a>
       </div>
       <div class="price-card">
-        <div class="price-name">Institucional Básico</div>
-        <div class="price-users">Hasta 10 docentes</div>
-        <div class="price-amount">Consultar</div>
-        <div class="price-period">según cantidad de docentes</div>
+        <div class="price-name">Institucional</div>
+        <div class="price-users">Para todo tu colegio</div>
+        <div class="price-amount">Por cuenta</div>
+        <div class="price-period">cuanto más cuentas, menor precio</div>
         <div class="price-features">
-          <div class="price-feat"><i class="ti ti-check"></i> Todo Individual</div>
-          <div class="price-feat"><i class="ti ti-check"></i> Gestión de docentes</div>
-          <div class="price-feat"><i class="ti ti-check"></i> Carga desde Excel</div>
-          <div class="price-feat"><i class="ti ti-check"></i> Panel administrativo</div>
-        </div>
-        <a href="https://app.aulaxpro.com" class="price-btn">Consultar</a>
-      </div>
-      <div class="price-card">
-        <div class="price-name">Institucional Pro</div>
-        <div class="price-users">Desde 11 docentes</div>
-        <div class="price-amount">Consultar</div>
-        <div class="price-period">cotizar por mes</div>
-        <div class="price-features">
-          <div class="price-feat"><i class="ti ti-check"></i> Todo Básico</div>
-          <div class="price-feat"><i class="ti ti-check"></i> N docentes</div>
-          <div class="price-feat"><i class="ti ti-check"></i> Reportes de uso</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Cuentas para docentes y directivos</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Descuentos por volumen</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Panel del directivo</div>
+          <div class="price-feat"><i class="ti ti-check"></i> Alta de docentes en segundos</div>
           <div class="price-feat"><i class="ti ti-check"></i> Soporte dedicado</div>
         </div>
-        <a href="https://app.aulaxpro.com" class="price-btn">Empezar gratis</a>
+        <a href="https://app.aulaxpro.com" class="price-btn">Ver precio para mi colegio</a>
       </div>
     </div>
     <p class="trial-note">Todos los planes incluyen <strong>7 días de prueba gratuita</strong> sin tarjeta de crédito. Pagos procesados por MercadoPago.</p>
@@ -1035,6 +1033,43 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="section how-bg" id="faq">
+  <div class="section-inner">
+    <div style="text-align:center" class="fade-in">
+      <div class="section-tag" style="margin:0 auto 16px"><i class="ti ti-help-circle"></i> Preguntas frecuentes</div>
+      <h2 class="section-title">Todo lo que querés <span class="accent">saber</span></h2>
+      <p class="section-desc" style="margin:0 auto 48px">Si te queda alguna duda, escribinos a hola@aulaxpro.com.</p>
+    </div>
+    <div class="faq-list fade-in">
+      <div class="faq-item">
+        <button class="faq-q">¿Necesito saber de tecnología para usarlo? <i class="ti ti-plus"></i></button>
+        <div class="faq-a">Para nada. Si sabés usar WhatsApp o el correo, sabés usar AulaXpro. Escribís el tema en lenguaje normal y la IA genera el material. No hay nada que instalar ni configurar.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Sirve para mi materia y mi nivel? <i class="ti ti-plus"></i></button>
+        <div class="faq-a">Sí. Funciona para todas las materias y niveles —primaria, secundaria y superior—. Cargás tu programa y tu bibliografía, y la IA genera material ajustado a tu curso, no respuestas genéricas.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Qué pasa cuando terminan los 7 días de prueba? <i class="ti ti-plus"></i></button>
+        <div class="faq-a">Nada automático: no te cobramos sin avisar. La prueba no pide tarjeta. Si querés seguir, elegís un plan y pagás por MercadoPago. Si no, tu cuenta simplemente queda en pausa.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Están seguros mis datos y los de mis alumnos? <i class="ti ti-plus"></i></button>
+        <div class="faq-a">Sí. Tus materiales y la información de tus alumnos son privados y solo vos accedés a ellos. No compartimos ni vendemos datos.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Soy directivo, ¿puedo contratar cuentas para todo el colegio? <i class="ti ti-plus"></i></button>
+        <div class="faq-a">Sí. Con el plan Institucional elegís cuántas cuentas necesitás, ves el precio al instante (con descuento por volumen) y cargás los mails de tus docentes desde el panel del directivo. Cada docente recibe su invitación por correo.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Puedo cancelar cuando quiera? <i class="ti ti-plus"></i></button>
+        <div class="faq-a">Cuando quieras, sin llamados ni trámites. Cancelás desde la app y no se te vuelve a cobrar. Seguís usando AulaXpro hasta que termine el período que ya pagaste.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="contacto">
   <div class="cta-inner fade-in">
@@ -1060,6 +1095,7 @@
       <a href="#funciones">Funciones</a>
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#precios">Precios</a>
+      <a href="#faq">Preguntas frecuentes</a>
       <a href="https://app.aulaxpro.com">Entrar a la app</a>
     </div>
     <div class="footer-col">
@@ -1075,7 +1111,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 AulaXpro. Todos los derechos reservados.</span>
+    <span>© 2026 AulaXpro. Todos los derechos reservados.</span>
     <span>Hecho con IA · Diseñado para docentes</span>
   </div>
 </footer>
@@ -1102,6 +1138,13 @@
       e.preventDefault();
       var target = document.querySelector(href);
       if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      this.parentElement.classList.toggle('open');
     });
   });
 </script>
