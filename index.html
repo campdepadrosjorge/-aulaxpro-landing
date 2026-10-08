@@ -571,8 +571,12 @@
 
     /* ── MOBILE ── */
     @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-preview { display: none; }
+      .hero h1 { font-size: clamp(34px, 6vw, 52px); }
+      .hero-desc { max-width: 620px; }
       .features-grid { grid-template-columns: repeat(2,1fr); }
-      .pricing-grid { grid-template-columns: repeat(2,1fr); }
+      .pricing-grid { grid-template-columns: repeat(2,1fr); max-width: 680px; }
       .footer-inner { grid-template-columns: 1fr 1fr; }
     }
 
@@ -596,6 +600,7 @@
       transition: opacity .6s, transform .6s;
     }
     .fade-in.visible { opacity: 1; transform: none; }
+    @media (max-width: 1024px){ .br-hero{ display:none; } }
   
     /* FAQ */
     .faq-list { max-width: 760px; margin: 0 auto; }
@@ -636,7 +641,7 @@
         Probalo gratis 7 días · Sin tarjeta de crédito
       </div>
       <h1>
-        Preparás tu clase en<br>
+        Preparás tu clase en<br class="br-hero">
         <span class="underline">minutos</span>, no en horas
       </h1>
       <p class="hero-desc">
