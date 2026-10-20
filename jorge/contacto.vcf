@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Campdepadrós;Jorge;;;
+FN:Jorge Campdepadrós
+ORG:AulaXpro
+TITLE:Fundador de AulaXpro · Escritor · Tecnólogo Educativo
+TEL;TYPE=CELL,VOICE:+5491165747257
+EMAIL;TYPE=WORK:hola@aulaxpro.com
+EMAIL;TYPE=HOME:campdepadros.jorge@gmail.com
+URL:https://www.aulaxpro.com
+X-SOCIALPROFILE;TYPE=instagram:https://instagram.com/campdepadros.jorge
+NOTE:Asesoro a colegios y empresas en el uso de tecnología e inteligencia artificial.
+END:VCARD
