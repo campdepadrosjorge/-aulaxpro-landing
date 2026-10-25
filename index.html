@@ -612,6 +612,13 @@
     .faq-item.open .faq-q i { transform:rotate(45deg); }
     .faq-a { max-height:0; overflow:hidden; transition:max-height .3s ease; padding:0 24px; color:var(--text-muted); font-size:15px; line-height:1.6; }
     .faq-item.open .faq-a { max-height:300px; padding:0 24px 20px; }
+
+    /* Banderas */
+    .flag { width:20px; height:14px; border-radius:2px; object-fit:cover; vertical-align:middle; box-shadow:0 0 1px rgba(0,0,0,.3); display:inline-block; }
+    .flag-strip { display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; padding:18px 16px 4px; }
+    .flag-strip .fs-label { font-size:13px; color:var(--text-muted); font-weight:600; }
+    .flag-strip .flag { width:26px; height:18px; }
+    .author-role .flag { width:16px; height:11px; margin-right:5px; }
 </style>
 </head>
 <body>
@@ -702,7 +709,7 @@
             <div class="preview-gen">
               <div class="preview-gen-title">GENERADO HOY</div>
               <div class="preview-gen-item"><div class="preview-gen-dot"></div><div class="preview-gen-text">Plan de clase — La célula</div></div>
-              <div class="preview-gen-item"><div class="preview-gen-dot" style="background:#79BD9A"></div><div class="preview-gen-text">Rúbrica — TP grupal</div></div>
+              <div class="preview-gen-item"><div class="preview-gen-dot" style="background:#79BD9A"></div><div class="preview-gen-text">Rúbrica — Trabajo grupal</div></div>
               <div class="preview-gen-item"><div class="preview-gen-dot" style="background:#CFF09E"></div><div class="preview-gen-text">Evaluación — Unidad 3</div></div>
             </div>
           </div>
@@ -715,6 +722,17 @@
     </div>
   </div>
 </section>
+
+<!-- FLAG STRIP -->
+<div class="flag-strip">
+  <span class="fs-label">Docentes de toda Latinoamérica:</span>
+  <img class="flag" src="https://flagcdn.com/mx.svg" alt="México" title="México" loading="lazy">
+  <img class="flag" src="https://flagcdn.com/ar.svg" alt="Argentina" title="Argentina" loading="lazy">
+  <img class="flag" src="https://flagcdn.com/cl.svg" alt="Chile" title="Chile" loading="lazy">
+  <img class="flag" src="https://flagcdn.com/co.svg" alt="Colombia" title="Colombia" loading="lazy">
+  <img class="flag" src="https://flagcdn.com/pe.svg" alt="Perú" title="Perú" loading="lazy">
+  <img class="flag" src="https://flagcdn.com/uy.svg" alt="Uruguay" title="Uruguay" loading="lazy">
+</div>
 
 <!-- STATS BAR -->
 <div class="stats-bar">
@@ -1010,7 +1028,7 @@
           <div class="author-avatar">MR</div>
           <div>
             <div class="author-name">María R.</div>
-            <div class="author-role">Profesora de Biología, Ciudad de México</div>
+            <div class="author-role"><img class="flag" src="https://flagcdn.com/mx.svg" alt="México">Profesora de Biología, Ciudad de México</div>
           </div>
         </div>
       </div>
@@ -1021,7 +1039,7 @@
           <div class="author-avatar">CL</div>
           <div>
             <div class="author-name">Carlos L.</div>
-            <div class="author-role">Profesor de Historia, Córdoba (Argentina)</div>
+            <div class="author-role"><img class="flag" src="https://flagcdn.com/ar.svg" alt="Argentina">Profesor de Historia, Córdoba (Argentina)</div>
           </div>
         </div>
       </div>
@@ -1032,7 +1050,7 @@
           <div class="author-avatar">AL</div>
           <div>
             <div class="author-name">Ana L.</div>
-            <div class="author-role">Directora de nivel medio, Santiago (Chile)</div>
+            <div class="author-role"><img class="flag" src="https://flagcdn.com/cl.svg" alt="Chile">Directora de nivel medio, Santiago (Chile)</div>
           </div>
         </div>
       </div>
